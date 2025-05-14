@@ -28,11 +28,14 @@
         <hr>
 
         <?php if (!empty($details)): ?>
+            <?php $i = 1; ?>
             <?php foreach ($details as $d): ?>
                 <?php if ($d['status'] === 'show'): ?>
                     <div class="mb-4 border-bottom pb-3">
+                        <h4>Langkah <?= $i++ ?>.</h4>
+
                         <?php if (!empty($d['text'])): ?>
-                            <h5><?= esc($d['text']) ?></h5>
+                            <p><?= esc($d['text']) ?></p>
                         <?php endif; ?>
 
                         <?php if (!empty($d['url'])): ?>

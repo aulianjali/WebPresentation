@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?= esc($tutorial['judul']) ?> - PDF View</title>
+    <title><?= esc($tutorial['judul']) ?> - Finished</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @media print {
@@ -33,10 +33,13 @@
         <hr>
 
         <?php if (!empty($details)): ?>
+            <?php $i = 1; ?>
             <?php foreach ($details as $d): ?>
                 <div class="mb-4 border-bottom pb-3">
+                    <h4>Langkah <?= $i++ ?>.</h4>
+
                     <?php if (!empty($d['text'])): ?>
-                        <h5><?= esc($d['text']) ?></h5>
+                        <p><?= esc($d['text']) ?></p>
                     <?php endif; ?>
 
                     <?php if (!empty($d['url'])): ?>
