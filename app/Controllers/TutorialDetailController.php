@@ -17,7 +17,7 @@ class TutorialDetailController extends BaseController
         $this->tutorialDetailModel = new TutorialDetailModel();
     }
 
-    // Tampilkan semua detail tutorial dari master tertentu
+
     public function index($tutorialId)
     {
         $tutorial = $this->tutorialMasterModel->find($tutorialId);
@@ -36,7 +36,7 @@ class TutorialDetailController extends BaseController
         ]);
     }
 
-    // Tampilkan form tambah/edit detail tutorial
+
     public function create($tutorialId, $detailId = null)
     {
         $tutorial = $this->tutorialMasterModel->find($tutorialId);
@@ -58,14 +58,14 @@ class TutorialDetailController extends BaseController
         ]);
     }
 
-    // Simpan data detail baru
+
    public function store($tutorialId) {
     $text  = $this->request->getPost('text');
     $code  = $this->request->getPost('code');
     $url   = $this->request->getPost('url');
     $image = $this->request->getFile('image');
 
-    // Validasi konten minimal salah satu harus diisi
+
     if (empty($text) && empty($code) && empty($url) && (!$image || !$image->isValid())) {
         return redirect()->back()->withInput()->with('errors', [
             'content' => 'Minimal isi salah satu dari Text, Code, URL, atau Image.'
@@ -87,7 +87,7 @@ class TutorialDetailController extends BaseController
 
     $order = (int) $this->request->getPost('tutor_order');
 
-    // Geser urutan yang lebih besar atau sama
+
     $this->tutorialDetailModel
         ->where('tutorial_id', $tutorialId)
         ->where('tutor_order >=', $order)
@@ -122,7 +122,7 @@ class TutorialDetailController extends BaseController
     $url   = $this->request->getPost('url');
     $image = $this->request->getFile('image');
 
-    // Validasi konten minimal salah satu harus diisi
+
     if (empty($text) && empty($code) && empty($url) && (!$image || !$image->isValid())) {
         return redirect()->back()->withInput()->with('errors', [
             'content' => 'Minimal isi salah satu dari Text, Code, URL, atau Image.'
@@ -208,15 +208,15 @@ class TutorialDetailController extends BaseController
 {
     $detail = $this->tutorialDetailModel->find($detailId);
 
-    // Validasi data
+   
     if (!$detail || $detail['tutorial_id'] != $tutorialId) {
         return redirect()->back()->with('error', 'Data tidak ditemukan.');
     }
 
-    // Toggle status dari 'show' ke 'hide' atau sebaliknya
+  
     $newStatus = $detail['status'] === 'show' ? 'hide' : 'show';
 
-    // Update status
+
     $updated = $this->tutorialDetailModel->update($detailId, [
         'status' => $newStatus
     ]);
@@ -225,7 +225,7 @@ class TutorialDetailController extends BaseController
         return redirect()->back()->with('error', 'Gagal mengubah status.');
     }
 
-    // Redirect ke halaman detail tutorial dengan pesan sukses
+    
     return redirect()->to("/tutorial/{$tutorialId}/detail");
 }
 

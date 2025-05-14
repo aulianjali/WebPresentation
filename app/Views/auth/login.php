@@ -56,7 +56,7 @@
 <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
     <h4>Login ke WebPresentationApp</h4>
 
-    <!-- pesan sukses setelah logout -->
+    <!-- pesan sukses  -->
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= session()->getFlashdata('success') ?>
@@ -64,7 +64,7 @@
         </div>
     <?php endif; ?>
 
-    <!-- pesan error jika login gagal -->
+    <!-- pesan error  -->
     <?php if (session()->getFlashdata('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <?= session()->getFlashdata('error') ?>

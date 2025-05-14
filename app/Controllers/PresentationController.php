@@ -13,15 +13,13 @@ class PresentationController extends BaseController
     }
 
    public function show($slug) {
-    // Mencari tutorial berdasarkan URL presentation
+ 
     $tutorial = $this->tutorialModel->where('url_presentation', $slug)->first();
 
-    // Jika tutorial ditemukan
     if ($tutorial) {
-        // Mengambil detail tutorial berdasarkan tutorial_id
         $details = (new \App\Models\TutorialDetailModel())
                     ->where('tutorial_id', $tutorial['id'])
-                    ->where('status', 'show') // Menampilkan hanya detail dengan status 'show'
+                    ->where('status', 'show') 
                     ->findAll();
 
         return view('view/presentation', [
@@ -30,17 +28,16 @@ class PresentationController extends BaseController
         ]);
     }
 
-    // Jika tidak ada, redirect ke tutorial list
+
     return redirect()->to('/tutorial');
     }
 
     public function finished($slug) {
-    // Mencari tutorial berdasarkan URL finished
+
     $tutorial = $this->tutorialModel->where('url_finished', $slug)->first();
 
-    // Jika tutorial ditemukan
+
     if ($tutorial) {
-        // Mengambil detail tutorial berdasarkan tutorial_id
         $details = (new \App\Models\TutorialDetailModel())
                     ->where('tutorial_id', $tutorial['id'])
                     ->findAll();
@@ -51,7 +48,7 @@ class PresentationController extends BaseController
         ]);
     }
 
-    // Jika tidak ada, redirect ke tutorial list
+    
     return redirect()->to('/tutorial');
     }
 

@@ -13,9 +13,9 @@ $routes->post('/login', 'AuthController::login');
 $routes->get('/logout', 'AuthController::logout');
 $routes->post('/logout', 'AuthController::logout');
 
-// FILTER: Hanya user login yang boleh akses
+// FILTER
 $routes->group('', ['filter' => 'auth'], function($routes) {
-    // Redirect root ke tutorial (bisa diubah sesuai preferensi)
+    // Redirect root ke tutorial
     $routes->get('/', 'TutorialMasterController::index');
 
     // Tutorial master
@@ -40,6 +40,5 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 // BEBAS DIAKSES TANPA LOGIN
 $routes->get('presentation/(:segment)', 'PresentationController::show/$1');
 $routes->get('finished/(:segment)', 'PresentationController::finished/$1');
-
 $routes->get('api/(:segment)', 'ApiController::getByMatkul/$1');
 

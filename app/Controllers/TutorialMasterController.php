@@ -16,7 +16,6 @@ class TutorialMasterController extends BaseController
         $this->session = \Config\Services::session();
         $this->tutorialModel = new TutorialMasterModel();
 
-        // Cek login, tetapi tidak bisa langsung redirect di constructor
         if (!$this->session->get('isLoggedIn')) {
             header('Location: /login');
             exit;
@@ -32,7 +31,6 @@ class TutorialMasterController extends BaseController
 
     public function create()
     {
-        // Ambil data mata kuliah dari API
         $client = \Config\Services::curlrequest();
         $response = $client->request('GET', 'https://jwt-auth-eight-neon.vercel.app/getMakul', [
             'headers' => [
@@ -80,7 +78,6 @@ class TutorialMasterController extends BaseController
     }
 
    public function update($id) {
-    // Update tutorial master
     $this->tutorialModel->update($id, [
         'kode_matkul'      => $this->request->getPost('kode_matkul'),
         'judul'            => $this->request->getPost('judul'),
@@ -104,10 +101,8 @@ class TutorialMasterController extends BaseController
         $imageFile->move(ROOTPATH . 'public/uploads', $imageName);
     }
 
-    // Simpan detail jika ada
     if (!empty($text) || !empty($code) || $imageName) {
         $detailModel = new TutorialDetailModel();
-        // Memeriksa apakah tutorial detail sudah ada, jika ada update jika tidak insert
         $existingDetail = $detailModel->where('tutorial_id', $id)->first();
         if ($existingDetail) {
             $detailModel->update($existingDetail['id'], [
